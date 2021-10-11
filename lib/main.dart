@@ -26,6 +26,13 @@ class _RandomWordsState extends State<RandomWords> {
         ],
       ),
       body: _buildSuggestions(),
+      bottomNavigationBar: TextField(
+        decoration: InputDecoration(
+            border: OutlineInputBorder(), hintText: 'Add new suggestion'),
+        onSubmitted: (String value) {
+          _addNewSuggestion(value);
+        },
+      ),
     );
   }
 
@@ -66,6 +73,13 @@ class _RandomWordsState extends State<RandomWords> {
         });
       },
     );
+  }
+
+  void _addNewSuggestion(String string) {
+    setState(() {
+      final wordToAdd = WordPair(string, " ");
+      _suggestions.insert(0, wordToAdd);
+    });
   }
 
   void _pushSaved() {
